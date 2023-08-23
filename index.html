@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clock</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="clock">
+        <div>
+            <div class="clock_dial"></div>
+            <div class="clock_dial"></div>
+            <div class="clock_dial"></div>
+            <div class="clock_dial"></div>
+            <div class="clock_dial"></div>
+            <div class="clock_dial"></div>
+        </div>
+        <div>
+            <div class="clock_hand" id="minute"></div>
+            <div class="clock_hand" id="hour"></div>
+            <div class="clock_hand" id="second"></div>
+        </div>
+    </div>
+</body>
+<script>
+    const deg = 6;
+const hour = document.getElementById("hour");
+const min = document.getElementById("minute");
+const sec = document.getElementById("second");
+
+const setClock = () => {
+	let day = new Date();
+	let hh = day.getHours();
+	let mm = day.getMinutes() ;
+	let ss = day.getSeconds() ;
+	// hour.style.rotate = `${(hh+(mm/60))*30-180}deg`;
+	// min.style.rotate = `${(mm*6)-180}deg`;
+	// sec.style.rotate = `${(ss*6)-180}deg`;
+    hour.style.setProperty('--hr-deg-start',`${(hh+(mm/60))*30-180}deg`); 
+    hour.style.setProperty('--hr-deg-end',`${(hh+(mm/60))*30+180}deg`); 
+    min.style.setProperty('--mn-deg-start',`${(mm+(ss/60))*6-180}deg`); 
+    min.style.setProperty('--mn-deg-end',`${(mm+(ss/60))*6+180}deg`); 
+    sec.style.setProperty('--sc-deg-start',`${(ss*6)-180}deg`); 
+    sec.style.setProperty('--sc-deg-end',`${(ss*6)+180}deg`); 
+};
+
+// first time
+setClock();
+</script>
+</html>

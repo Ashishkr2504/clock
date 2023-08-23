@@ -1,0 +1,192 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: rgba(0, 0, 0);
+    color-scheme: dark light;
+}
+
+:root {
+    --clock-diameter:150px;
+    --clock-size:clamp(100px,var(--clock-diameter), 600px);
+}
+
+.clock {
+    height: var(--clock-size);
+    width: var(--clock-size);
+    border-radius: 50%;
+    /* border: 1px solid rgba(255, 255, 255, 0.377); */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    /* overflow: hidden; */
+}
+.clock::before{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: url(https://www.pngmart.com/files/23/Clock-Face-PNG-Transparent.png);
+    background-size:111%;
+    background-position: center;
+    border-radius: 50%;
+    filter: invert(1);
+}
+.clock::after {
+    content: "12";
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    color: rgba(255, 255, 255, 0.692);
+    transform: translate(-50%, -50%);
+    font-size: calc(var(--clock-diameter)/7);
+}
+
+.clock_dial {
+    /* max-height: calc(var(--clock-diameter)/1.1); */
+    --height:clamp(100%,calc(var(--clock-diameter)/1.012),calc(var(--clock-diameter)/1.01));
+    height: var(--height);
+    width: calc(var(--clock-diameter)/150);
+    border-top: solid calc(var(--clock-diameter)/30) rgba(255, 255, 255, 0.699);
+    border-bottom: solid calc(var(--clock-diameter)/30) rgba(255, 255, 255, 0.699);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%,0);
+    transform-origin:0 calc(var(--height)/2) ;
+    rotate: 0deg ;
+}
+
+.clock_dial::before,.clock_dial::after {
+    content: "";
+    position: absolute;
+    transform: translate(0, 0);
+    background: white;
+    width: calc(var(--clock-diameter)/150);
+    height: calc(var(--clock-diameter)/150);
+    border-radius: 50vh;
+    scale: 4;
+}
+.clock_dial::before{
+    top: 2%;
+}
+.clock_dial::after{
+    bottom: 2%;
+}
+
+.clock_dial:nth-of-type(1)::before {
+    display: none;
+}
+/* .clock_dial:nth-of-type(n){
+    background-color: rgba(128, 150, 34, 0.281);
+} */
+
+.clock_dial:nth-of-type(2) {
+    rotate: 30deg;
+}
+
+.clock_dial:nth-of-type(3) {
+    rotate: 60deg;
+}
+
+.clock_dial:nth-of-type(4) {
+    rotate: 90deg;
+}
+
+.clock_dial:nth-of-type(5) {
+    rotate: 120deg;
+}
+
+.clock_dial:nth-of-type(6) {
+    rotate: 150deg;
+}
+.clock_hand{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,0);
+    transform-origin: 0 0;
+    border-radius: 10px;
+}
+#second{
+    width: calc(var(--clock-diameter)/200);
+    height: calc(var(--clock-diameter)/2.1);
+    background-color: rgb(255, 0, 0);
+    animation: second 60s steps(60) infinite ;
+    --sc-deg-start:180deg;
+    --sc-deg-end:540deg;
+}
+@keyframes second {
+    from{
+        rotate: var(--sc-deg-start);
+    }
+    to{
+        rotate: var(--sc-deg-end);
+    }
+}
+#hour::after{
+    content: "";
+    position: absolute;
+    width: calc(var(--clock-diameter)/20);
+    height: calc(var(--clock-diameter)/20);
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: red;
+    border-radius: 50vh;
+    color: aliceblue;
+}
+#second::before{
+    content: "";
+    position: absolute;
+    width: calc(var(--clock-diameter)/50);
+    height: calc(var(--clock-diameter)/8);
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: red;
+    border-radius: 50vh;
+}
+#minute{
+    width: calc(var(--clock-diameter)/60);
+    height: calc(var(--clock-diameter)/2.5);
+    background-color: rgb(255, 252, 252);
+    animation: minute 3600s linear infinite ;
+    --mn-deg-start:180deg;
+    --mn-deg-end:540deg;
+}
+#second::after{
+    content: "";
+    position: absolute;
+    width: calc(var(--clock-diameter)/100);
+    height: calc(var(--clock-diameter)/100);
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: rgb(255, 255, 255);
+    border-radius: 50vh;
+    color: aliceblue;
+}
+@keyframes minute {
+    from{
+        rotate: var(--mn-deg-start);
+    }
+    to{
+        rotate: var(--mn-deg-end);
+    }
+}
+#hour{
+    width: calc(var(--clock-diameter)/40);
+    height: calc(var(--clock-diameter)/4);
+    background-color: rgb(255, 252, 252);
+    animation: hour 43200s linear infinite ;
+    --hr-deg-start:180deg;
+    --hr-deg-end:540deg;
+}
+@keyframes hour {
+    from{
+        rotate: var(--hr-deg-start);
+    }
+    to{
+        rotate: var(--hr-deg-end);
+    }
+}
